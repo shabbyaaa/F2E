@@ -4,6 +4,7 @@
   "main": "index.js",
   "author": "hs",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "build": "babel src -d lib"
   },
@@ -17,6 +18,11 @@
     "babel-register": "^6.26.0"
   },
   "dependencies": {
-    "babel-runtime": "^6.26.0"
+    "@babel/parser": "^7.17.3",
+    "@babel/traverse": "^7.17.3",
+    "babel-runtime": "^6.26.0",
+    "babel-traverse": "^6.26.0",
+    "babel-types": "^6.26.0",
+    "babylon": "^6.18.0"
   }
 }
