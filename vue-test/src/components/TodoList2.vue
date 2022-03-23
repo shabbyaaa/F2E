@@ -32,6 +32,7 @@ function add () {
   color.value = Math.random() > 0.5 ? 'blue' : 'red'
 }
 
+
 </script>
 
 <style scoped>
