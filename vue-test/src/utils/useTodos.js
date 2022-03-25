@@ -3,8 +3,16 @@ import { computed, ref } from 'vue'
 export default function useTodos() {
   const title = ref('')
   const todos = ref([{ title:'学习Vue',done:false }])
+  const showModal = ref(false)
 
   function addTodo () {
+    if (!title.value) {
+      showModal.value = true
+      setTimeout(() => {
+        showModal.value = false 
+      }, 1500)
+      return
+    }
     todos.value.push({
       title: title.value,
       done: false
@@ -27,5 +35,5 @@ export default function useTodos() {
     },
   });
 
-  return { title, todos, addTodo, clear, active, all, allDone }
+  return { title, todos, addTodo, clear, active, all, allDone, showModal }
 }

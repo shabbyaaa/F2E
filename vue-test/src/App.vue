@@ -12,7 +12,13 @@
     <router-link to="/">首页</router-link>
     <router-link to="/about">关于</router-link>
   </div> 
-  <router-view></router-view>
+  <!-- 通过v-slot获取渲染的组件并复制给Component -->
+  <router-view v-slot="{ Component }">
+    <transition name="route" modae="out-in">
+      <!-- 内置组件component的 is 属性动态渲染组件 -->
+      <component :is="Component" /> 
+    </transition>
+  </router-view>
 </template>
 
 <style>
