@@ -43,45 +43,46 @@ import useTodos from '../utils/useTodos'
 const count = ref(1)
 const { title, todos, addTodo, clear, active, all, allDone, showModal } = useTodos()
 const color = ref('red')
-const animate = {
+const animate = reactive({
   show: false,
   el: null
-}
+})
 
 function add () {
   count.value++
   color.value = Math.random() > 0.5 ? 'blue' : 'red'
 }
 
-// function removeTodo (e, i) {
-//   console.log('i: ', i);
-//   todos.value.splice(i, 1)
-// }
-
 function beforeEnter (el) {
+  console.log('el: ', el);
   const dom = animate.el
   const rect = dom.getBoundingClientRect()
   const x = window.innerWidth - rect.left - 60
   const y = rect.top - 10
-  
-  el.style.transform =  `translate(-${x}px, ${y}px`
+
+  el.style.transform =  `translate(${-x}px, ${y}px)`
 }
 
 function enter (el, done) {
+  console.log('el: ', el);
   document.body.offsetHeigth
-  el.style.transform = 'translate(0, 0)'
+  el.style.transform = 'translate(0px, 0px)'
   el.addEventListener('transitionend', done)
 }
 
-function afterEnter (el) {
-  animate.show = false
+function afterEnter(el){ 
+  // 没有执行
+  animate.show = false 
   el.style.display = 'none'
+  console.log('m: ', animate);
 }
 
 function removeTodo(e, i) {
   animate.el = e.target
   animate.show = true
-  todos.value.splice(i, 1)
+  setTimeout(() => {
+    todos.value.splice(i, 1)
+  })
 }
 
 
@@ -134,11 +135,11 @@ h1 {
   transform: translateX(30px);
 }
 
-.animate-wrap .animate {
+.dustbin, .animate-wrap .animate {
   position: fixed;
   right: 10px;
   top: 10px;
   z-index: 100;
-  transition: all 0.5s linear;
+  transition: all 5s linear;
 }
 </style>

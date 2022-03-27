@@ -2,7 +2,7 @@ import { computed, ref } from 'vue'
 
 export default function useTodos() {
   const title = ref('')
-  const todos = ref([{ title:'学习Vue',done:false }])
+  const todos = ref([{ title:'学习Vue',done:false }, { title:'学习Vue1',done:false }])
   const showModal = ref(false)
 
   function addTodo () {

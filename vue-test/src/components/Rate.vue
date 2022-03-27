@@ -8,15 +8,17 @@
       </span>
     </div>
   </div>
+  <div>{{ props.modelValue }}</div>
 </template>
 
 <script setup>
-import { defineProps, computed, ref, defineEmits } from 'vue'
+import { defineProps, computed, ref, defineEmits, watchEffect } from 'vue'
 
 const props = defineProps({
   modelValue: Number,
   theme: { type: String, default: 'orange'}
 })
+
 console.log('props :>> ', props);
 
 // const rate = computed(() => "★★★★★☆☆☆☆☆".slice(5 - props.value, 10 - props.value))
@@ -50,6 +52,10 @@ function onRate (num) {
   emits('update:modelValue', num)
 }
 
+// 此处记得 props改变了 子组件是用了ref来接受了props里的值，如果不用下面方法，会导致子组件并没有更新
+watchEffect(()=> {
+  width.value = props.modelValue
+})
 </script>
 
 <style scoped>
