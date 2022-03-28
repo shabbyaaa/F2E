@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
-import App from './App.vue'
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 
-createApp(App).use(mavonEditor).mount('#app')
+import App from './App.vue'
+import router from 'router'
+
+createApp(App).use(router).use(mavonEditor).mount('#app')

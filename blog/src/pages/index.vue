@@ -5,7 +5,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import MarkDonw from '../components/MarkDonw.vue'
+import MarkDonw from 'components/MarkDonw.vue'
 
 const data = ref('hello world')
 </script>

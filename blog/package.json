@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "mavon-editor": "3.0.0-beta",
-    "vue": "^3.2.25"
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.14"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.2.0",
