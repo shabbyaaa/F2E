@@ -1,16 +1,10 @@
-/*
- * @Author: Tusi
- * @Date: 2019-04-09 16:05:13
- * @LastEditors: Tusi
- * @LastEditTime: 2021-05-27 09:24:43
- * @Description: db helpers
- */
 const mysql = require("mysql");
 const config = require("../config");
 const errcode = require('../utils/errcode');
 
 const pool = mysql.createPool(config.mysql);
 
+// 创建connection是个很耗时的操作，所以建议在项目启动的时候去创建connection。避免在方法里需要connection时再去new一个connection是很耗费时间的。
 pool.on('connection', (connection) => {
     // console.log('取得连接');
 });
@@ -20,7 +14,7 @@ pool.on('release', (connection) => {
 });
 
 pool.on("error", (err) => {
-  console.error(err);
+    console.error(err);
 });
 
 function getConnection(res) {

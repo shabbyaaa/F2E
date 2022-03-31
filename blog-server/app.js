@@ -29,9 +29,9 @@ const sesisonMiddleware = session({
 
 // 如果使用Nginx，则在nginx处理gzip即可
 // app.use(compression());
-// 完善http头部，提高安全性
+// Helmet 通过设置各种 HTTP 标头来帮助您保护您的 Express 应用程序 Express中间件
 app.use(helmet());
-// session 中间件
+// session 中间件 
 app.use(sesisonMiddleware);
 // 日志中间件
 app.use(logger('dev'));
@@ -56,6 +56,7 @@ ws.init(io);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
+  
   err.status = 404;
   next(err);
 });
