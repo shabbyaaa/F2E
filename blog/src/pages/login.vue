@@ -1,4 +1,11 @@
 <template>
-  后台管理登录界面
+  <h1>{{ data }}</h1>
+  <MarkDonw v-model="data" />
 </template>
 
+<script setup>
+import { ref } from 'vue'
+import MarkDonw from 'components/MarkDonw.vue'
+
+const data = ref('hello world')
+</script>
