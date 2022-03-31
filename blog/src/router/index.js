@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Index from 'pages/index.vue'
-import About from 'pages/about.vue'
+import Login from 'pages/login.vue'
 
 const routes = [
   {
@@ -9,9 +9,9 @@ const routes = [
     component: Index
   },
   {
-    path: '/about',
-    name: 'About',
-    component: About
+    path: '/login',
+    name: 'Login',
+    component: Login
   }
 ]
 
