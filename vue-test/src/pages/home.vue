@@ -2,6 +2,7 @@
   <h1>index</h1>
   <!-- <TodoList2 /> -->
   <h1>你的评分是{{ score }}</h1>
+  <!-- v-model 双向绑定 -->
   <Rate v-model="score"></Rate>
   <Rate v-model="score">ss</Rate>
 </template>
