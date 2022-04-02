@@ -20,8 +20,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.set('port', process.env.PORT || '3000');
 
+// store: session的存储方式，默认为存放在内存中
+// resave: 即使session没有被修改，也保存session值，默认为true
+// saveUninitialized：强制未初始化的session保存到数据库
 const sesisonMiddleware = session({
-  secret: 'llwb', 
+  secret: 'llwb',  // 服务端生成session的签名
+  name: 'test',
   cookie: ({ path: '/', httpOnly: true, secure: false, maxAge: null }),
   resave: true,  
   saveUninitialized: true

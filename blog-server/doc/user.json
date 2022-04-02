@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "e18036b0-f4d2-4f13-83b5-08b8b33a13e3",
+		"name": "user",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "登出接口",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8002/user/logout",
+					"host": [
+						"localhost"
+					],
+					"port": "8002",
+					"path": [
+						"user",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取当前用户",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8002/user/current",
+					"host": [
+						"localhost"
+					],
+					"port": "8002",
+					"path": [
+						"user",
+						"current"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "登录",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userName",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						},
+						{
+							"key": "captcha",
+							"value": "fdf3",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8002/user/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8002",
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "忘记密码",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8002/user/forgetpwd",
+					"host": [
+						"localhost"
+					],
+					"port": "8002",
+					"path": [
+						"user",
+						"forgetpwd"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

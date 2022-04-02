@@ -643,6 +643,6 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 'tusi', 'Tusi', '6dcc9ca91cdb893ce9f2313ac90bc9114a21c4f58a305caa5870ba01219174fa', 'xxxx@163.com', '15xxxxxxxxx', '长沙市岳麓区', 1, NULL, '2022-02-11 14:12:59', 'fitGnWalqWWzsdaoEW1HTPLSG09a3kIn');
+INSERT INTO `user` VALUES (1, 'admin', 'admin', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'xxxx@163.com', '15xxxxxxxxx', '长沙市岳麓区', 1, NULL, '2022-02-11 14:12:59', 'fitGnWalqWWzsdaoEW1HTPLSG09a3kIn');
 
 SET FOREIGN_KEY_CHECKS = 1;

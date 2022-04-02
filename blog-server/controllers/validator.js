@@ -24,6 +24,7 @@ router.get('/img_code', function(req, res, next) {
 		// viewBox
 		viewBox: '0,0,150,50'
 	});
+	// 在这里保存了captcha在登录的时候验证使用
 	req.session.captcha = captcha.text;
 	res.send({
 		code: '0',
