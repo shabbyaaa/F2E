@@ -10,22 +10,26 @@ const dbUtils = require('../utils/db');
  * @description 登录
  */
 router.put('/login', function (req, res, next) {
+	console.log('req: ', req.headers);
 	const params = req.body;
-	if (!req.session.captcha) {
-		res.send({
-			code: '001001',
-			data: null,
-			msg: '验证码有误，换一张试试呢'
-		});
-	} else if (params.captcha.toLowerCase() != req.session.captcha.toLowerCase()) {
-		res.send({
-			code: '001002',
-			data: null,
-			msg: '验证码输入有误'
-		});
-	} else {
+	console.log('params: ', params);
+	console.log('params.userName :>> ', params.userName);
+	// if (!req.session.captcha) {
+	// 	res.send({
+	// 		code: '001001',
+	// 		data: null,
+	// 		msg: '验证码有误，换一张试试呢'
+	// 	});
+	// } else if (params.captcha.toLowerCase() != req.session.captcha.toLowerCase()) {
+	// 	res.send({
+	// 		code: '001002',
+	// 		data: null,
+	// 		msg: '验证码输入有误'
+	// 	});
+	// } else {
 		dbUtils.getConnection(res).then(connection => {
 			dbUtils.query({ sql: indexSQL.QueryByUserNameAndPwd, values: [params.userName, params.password] }, connection, false).then(({ results }) => {
+				console.log('results: ', results);
 				if (results.length > 0) {
 					// 更新登录时间和token
 					return dbUtils.query({ sql: indexSQL.UpdateUserById, values: [{ last_login_time: new Date(), token: req.session.id }, results[0].id] }, connection, false).then(() => {
@@ -53,7 +57,7 @@ router.put('/login', function (req, res, next) {
 				connection.release();
 			})
 		})
-	}
+	// }
 });
 
 /**

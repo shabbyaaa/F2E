@@ -1,5 +1,5 @@
 <template>
-s
+  首页
 </template>
 
 <script setup>
