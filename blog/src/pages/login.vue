@@ -58,7 +58,6 @@ const login = (userName, password) => {
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   // xhr.setRequestHeader("Cookie", "test=s%3AsT15asX2ew4OZxy1tShAzQXewy-EkqZR.Md7I7i36xH7k%2F0vaK%2B36F2jJsX1Jyh5p78umRKKnkgc");
   xhr.send(data);
-  console.log('data: ', data);
 }
 
 
