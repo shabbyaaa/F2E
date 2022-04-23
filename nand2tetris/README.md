@@ -25,3 +25,5 @@
 设计电脑必须要做的事情 -  从真值表推出布尔函数表达式
 
 运行`.bat`程序之前，需要将`tools`路径添加到系统变量的`path`中
+
+`hdl: Hardware Description Language`硬件描述语言
