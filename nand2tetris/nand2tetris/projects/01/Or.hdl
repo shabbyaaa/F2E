@@ -8,7 +8,9 @@
  * out = 1 if (a == 1 or b == 1)
  *       0 otherwise
  * 或门
- * 思路：Or = Nand(Not(a), Not(b))
+ * 思路：out = Nand(Not(a), Not(b)) 或者
+ * out = Nand(Nand(a, a), Nand(b, b))
+ * Nand(a, a) 相当于Not(a)
  */
 
 CHIP Or {

@@ -7,6 +7,7 @@
  * Not gate:
  * out = not in
  * 非门
+ * 思路 out = Nand(in, true)
  */
 
 CHIP Not {
@@ -14,5 +15,5 @@ CHIP Not {
     OUT out;
 
     PARTS:
-    Nand(a = in, b = in, out = out);
+    Nand(a = in, b = true, out = out);
 }

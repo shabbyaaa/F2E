@@ -8,6 +8,7 @@
  * out = 1 if (a == 1 and b == 1)
  *       0 otherwise
  * 与门
+ * 思路 out = Not(Nand(a, b))
  */
 
 CHIP And {
@@ -15,7 +16,6 @@ CHIP And {
     OUT out;
 
     PARTS:
-    Nand(a = a, b = b, out = res1);
-    Nand(a = a, b = b, out = res2);
-    Nand(a = res1, b = res2, out = out);
+    Nand(a = a, b = b, out = res);
+    Not(in = res, out = out);
 }
