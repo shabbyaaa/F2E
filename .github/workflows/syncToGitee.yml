@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - '*'
+
 jobs:
   repo-sync:
     runs-on: ubuntu-latest
