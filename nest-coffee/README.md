@@ -7,3 +7,7 @@
 ## CRUD
 
 Create Read Update Delete
+
+## docker
+
+docker-compose up -d
