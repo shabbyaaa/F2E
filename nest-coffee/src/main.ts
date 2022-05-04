@@ -10,6 +10,11 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
+      transformOptions: {
+        // 全局层面上启用隐式类型转换 eg query中的string转换为number
+        // 如果使用了 则不需要再使用 @Type()
+        enableImplicitConversion: true,
+      },
     }),
   );
   await app.listen(3000);

@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Flavor } from './flavor.entity';
 
 @Entity() // sql table === 'coffee' 小写
 export class Coffee {
@@ -9,10 +16,17 @@ export class Coffee {
   @Column()
   name: string;
 
+  @Column({ nullable: true })
+  description: string;
+
   @Column()
   brand: string;
 
-  // 将数组储存为json 可选的 可以为空
-  @Column('json', { nullable: true })
-  flavors: string[];
+  @Column({ default: 0 })
+  recommendations: number;
+
+  // cascade: true 级联插入 属于coffee的flavors会自动插入到数据库中
+  @JoinTable()
+  @ManyToMany((type) => Flavor, (flavor) => flavor.coffees, { cascade: true })
+  flavors: Flavor[];
 }
