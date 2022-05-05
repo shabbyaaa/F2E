@@ -1,4 +1,4 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException, Scope } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Connection, Repository } from 'typeorm';
@@ -9,8 +9,13 @@ import { Coffee } from './entities/coffee.entity';
 import { Flavor } from './entities/flavor.entity';
 import { Event } from '../events/entities/event.entity';
 import { COFFEE_BRANDS } from './coffees.constants';
+import { ConfigService, ConfigType } from '@nestjs/config';
+import coffeesConfig from './config/coffees.config';
 
-@Injectable()
+// DEFAULT 单例
+// TRANSIENT 只要有地方使用就实例化
+// REQUEST 将在每个请求时实例化 请求几次实例几次
+@Injectable({ scope: Scope.DEFAULT })
 export class CoffeesService {
   constructor(
     @InjectRepository(Coffee)
@@ -20,8 +25,26 @@ export class CoffeesService {
     // 创建事务
     private readonly connection: Connection,
     @Inject(COFFEE_BRANDS) coffeeBrands: string[],
+    // private readonly configService: ConfigService,
+
+    // 直接注入整个命名空间配置对象 ConfigType 自动推断函数的返回类型  直接使用这个对象，而不是使用get方法
+    @Inject(coffeesConfig.KEY)
+    private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>,
   ) {
+    console.log('CoffeesService Instantiated :>> ');
     console.log('coffeeBrands :>> ', coffeeBrands);
+    // get第二个参数 默认值
+    // const databaseHost = this.configService.get<string>(
+    //   'DATABASE_HOST',
+    //   'localhost',
+    // );
+    // const databaseHost = this.configService.get('database.host', 'localhost');
+    // console.log('databaseHost :>> ', databaseHost);
+
+    // const coffeesConfig = this.configService.get('coffees');
+    // console.log('coffeesConfig :>> ', coffeesConfig);
+
+    console.log('coffeesConfiguration :>> ', coffeesConfiguration.foo);
   }
 
   findAll(paginationQuery: PaginationQueryDto) {
