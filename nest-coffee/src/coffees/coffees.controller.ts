@@ -8,6 +8,8 @@ import {
   Patch,
   Post,
   Query,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';
 import { Request } from 'express';
@@ -17,6 +19,8 @@ import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 
+// 单个controller上 仅在该controller定义每个路由处理程序
+// @UsePipes(ValidationPipe)
 @Controller('coffees')
 export class CoffeesController {
   constructor(
@@ -25,9 +29,11 @@ export class CoffeesController {
     @Inject(REQUEST) private readonly request: Request,
   ) {
     // CoffeesService那边使用REQUEST 这里也自动变为REQUEST 即请求几次实例化几次
-    console.log('CoffeesController created');
+    // console.log('CoffeesController created');
   }
 
+  // 绑定到单个路由
+  // @UsePipes(ValidationPipe)
   @Get()
   // 使用底层库 express 就不能用HttpCode或者拦截器了
   // findAll(@Res() response) {
@@ -48,8 +54,12 @@ export class CoffeesController {
     return this.coffeesService.create(createCoffeeDto);
   }
 
+  // validationPipe放到参数上 只有管道上特有
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCoffeeDto: UpdateCoffeeDto) {
+  update(
+    @Param('id') id: string,
+    @Body(ValidationPipe) updateCoffeeDto: UpdateCoffeeDto,
+  ) {
     return this.coffeesService.update(id, updateCoffeeDto);
   }
 

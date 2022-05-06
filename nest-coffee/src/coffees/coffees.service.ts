@@ -31,8 +31,8 @@ export class CoffeesService {
     @Inject(coffeesConfig.KEY)
     private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>,
   ) {
-    console.log('CoffeesService Instantiated :>> ');
-    console.log('coffeeBrands :>> ', coffeeBrands);
+    // console.log('CoffeesService Instantiated :>> ');
+    // console.log('coffeeBrands :>> ', coffeeBrands);
     // get第二个参数 默认值
     // const databaseHost = this.configService.get<string>(
     //   'DATABASE_HOST',
@@ -40,11 +40,9 @@ export class CoffeesService {
     // );
     // const databaseHost = this.configService.get('database.host', 'localhost');
     // console.log('databaseHost :>> ', databaseHost);
-
     // const coffeesConfig = this.configService.get('coffees');
     // console.log('coffeesConfig :>> ', coffeesConfig);
-
-    console.log('coffeesConfiguration :>> ', coffeesConfiguration.foo);
+    // console.log('coffeesConfiguration :>> ', coffeesConfiguration.foo);
   }
 
   findAll(paginationQuery: PaginationQueryDto) {
