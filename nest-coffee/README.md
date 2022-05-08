@@ -3,6 +3,11 @@
 - nest generate controller
 - nest g co --no-spec
 - nest generate controller module/abc
+- nest g interceptor // 拦截器
+- nest g mo // module
+- nest g co // controller
+- nest g pipe // pipe
+- nest g middleware //中间件
 
 ## CRUD
 

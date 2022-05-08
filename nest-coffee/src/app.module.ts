@@ -10,6 +10,7 @@ import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import appConfig from './config/app.config';
 import { APP_PIPE } from '@nestjs/core';
+import { CommonModule } from './common/common.module';
 
 // ConfigModule会在应用程序的根目录中查找 .env 文件
 // Joi 验证env中的变量有没有传递
@@ -52,6 +53,7 @@ import { APP_PIPE } from '@nestjs/core';
     }),
     CoffeeRatingModule,
     DatabaseModule,
+    CommonModule,
   ],
   controllers: [AppController],
   providers: [
