@@ -13,6 +13,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';
+import { ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
 import { Protocol } from 'src/common/decorators/protocol.decorator';
 import { Public } from 'src/common/decorators/public.decorator';
@@ -23,6 +24,7 @@ import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 
+@ApiTags('coffees')
 // 单个controller上 仅在该controller定义每个路由处理程序
 // @UsePipes(ValidationPipe)
 @Controller('coffees')
@@ -45,6 +47,7 @@ export class CoffeesController {
   // }
   // @SetMetadata('inPublic', true)
   @Public()
+  @ApiForbiddenResponse({ description: 'Forbidden' })
   async findAll(
     @Protocol('https') protocol: string,
     @Query() paginationQuery: PaginationQueryDto,

@@ -23,13 +23,7 @@ export class CoffeesService {
     @InjectRepository(Flavor)
     private readonly flavorRepository: Repository<Flavor>,
     // 创建事务
-    private readonly connection: Connection,
-    @Inject(COFFEE_BRANDS) coffeeBrands: string[],
-    // private readonly configService: ConfigService,
-
-    // 直接注入整个命名空间配置对象 ConfigType 自动推断函数的返回类型  直接使用这个对象，而不是使用get方法
-    @Inject(coffeesConfig.KEY)
-    private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>,
+    private readonly connection: Connection, // @Inject(COFFEE_BRANDS) coffeeBrands: string[], // private readonly configService: ConfigService, // 直接注入整个命名空间配置对象 ConfigType 自动推断函数的返回类型  直接使用这个对象，而不是使用get方法 // @Inject(coffeesConfig.KEY) // private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>,
   ) {
     // console.log('CoffeesService Instantiated :>> ');
     // console.log('coffeeBrands :>> ', coffeeBrands);
