@@ -1,32 +1,20 @@
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { Flavor } from './flavor.entity';
+import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-@Entity() // sql table === 'coffee' 小写
-export class Coffee {
-  // 自增主键
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
+// mongodb会将所有集合名变为小写的复数
+@Schema()
+export class Coffee extends Document {
+  @Prop()
   name: string;
 
-  @Column({ nullable: true })
-  description: string;
-
-  @Column()
+  @Prop()
   brand: string;
 
-  @Column({ default: 0 })
+  @Prop({ default: 0 })
   recommendations: number;
 
-  // cascade: true 级联插入 属于coffee的flavors会自动插入到数据库中
-  @JoinTable()
-  @ManyToMany((type) => Flavor, (flavor) => flavor.coffees, { cascade: true })
-  flavors: Flavor[];
+  @Prop([String])
+  flavors: string[];
 }
+
+export const CoffeeSchema = SchemaFactory.createForClass(Coffee);

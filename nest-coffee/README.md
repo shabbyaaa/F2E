@@ -85,3 +85,7 @@ each controller provide service etc should have its own dedicated test file
 端到端测试 e2e 放在单独的test文件夹中 命名`e2e-spec.ts` 适合于对整个系统进行高级验证
 
 单元测试侧重于单个类和函数
+
+## mongodb
+
+`docker-compose up name -d`
