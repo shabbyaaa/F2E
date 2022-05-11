@@ -22,7 +22,7 @@ console.log('process.env :>> ', process.env.DATABASE_HOST);
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
       autoLoadEntities: true, // 有助于自动加载模块，而不是指定实体数组
-      synchronize: true, // 确保TypeORM实体在每次运行应用程序时都会与数据库同步 生产禁用
+      synchronize: false, // 确保TypeORM实体在每次运行应用程序时都会与数据库同步 生产禁用
     }),
     DatabaseModule,
     UsersModule,
