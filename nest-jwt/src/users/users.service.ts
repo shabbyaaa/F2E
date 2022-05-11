@@ -20,7 +20,7 @@ export class UsersService {
     return this.userRepository.save(user);
   }
 
-  findAll(paginationQuery: PaginationQueryDto) {
+  async findAll(paginationQuery: PaginationQueryDto) {
     const { pageNo, pageSize } = paginationQuery;
 
     /**
@@ -29,8 +29,15 @@ export class UsersService {
      * limit 共取几条 10表示本次查询10条
      * pageNo, pageSize, itemCount
      */
+
+    const total = await this.userRepository.query(
+      `select count(*) as a from "public"."user" WHERE "user_status" != '${userState.Deleted}' limit 1`,
+    );
+
+    console.log('total :>> ', total);
+
     return this.userRepository.query(
-      `SELECT * FROM "public"."user" WHERE "user_status" != '${
+      `SELECT *, count(*) over () as total FROM "public"."user" WHERE "user_status" != '${
         userState.Deleted
       }' order by id limit ${pageSize} OFFSET ${(pageNo - 1) * pageSize}`,
     );
