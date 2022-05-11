@@ -8,10 +8,10 @@ import { ConfigService, ConfigType } from '@nestjs/config';
 import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
 import { Observable } from 'rxjs';
-import coffeesConfig from 'src/coffees/config/coffees.config';
+import coffeesConfig from '../../coffees/config/coffees.config';
 
 console.log('coffeesConfig :>> ', coffeesConfig.KEY);
-import appConfig from 'src/config/app.config';
+// import appConfig from 'src/config/app.config';
 import { IS_PUBLIC_KEY } from '../decorators/public.decorator';
 
 @Injectable()

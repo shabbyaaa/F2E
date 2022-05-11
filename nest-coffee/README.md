@@ -1,5 +1,7 @@
 # Nest官网基础课程
 
+[B站链接](https://www.bilibili.com/video/BV1T44y1W7Si?p=80&spm_id_from=pageDriver)
+
 - nest generate controller
 - nest g co --no-spec
 - nest generate controller module/abc
