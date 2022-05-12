@@ -7,7 +7,6 @@ import appConfig from './config/app.config';
 import { DatabaseModule } from './database/database.module';
 import { UsersModule } from './users/users.module';
 
-console.log('process.env :>> ', process.env.DATABASE_HOST);
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -30,8 +29,4 @@ console.log('process.env :>> ', process.env.DATABASE_HOST);
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
-  constructor() {
-    console.log('process.env. :>> ', process.env.DATABASE_HOST);
-  }
-}
+export class AppModule {}
