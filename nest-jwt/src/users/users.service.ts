@@ -48,11 +48,11 @@ export class UsersService {
     );
   }
 
-  async findOne(id: number) {
-    const user = await this.userRepository.findOne(id);
+  async findOne(idOrAccount: number | string) {
+    const user = await this.userRepository.findOne(idOrAccount);
 
     if (!user) {
-      throw new NotFoundException(`User #${id} not found`);
+      throw new NotFoundException(`User #${idOrAccount} not found`);
     }
 
     return user;
@@ -108,9 +108,10 @@ export class UsersService {
       sub: user.id,
       role: user.role,
     });
-    console.log('token :>> ', token);
-    return token;
 
-    console.log('token :>> ', token);
+    return {
+      access_token: token,
+      statusCode: 200,
+    };
   }
 }
