@@ -78,8 +78,7 @@ export class UsersService {
     return this.userRepository.save(user);
   }
 
-  async login(loginUserDto: LoginUserDto) {
-    console.log('LoginUserDto: ', loginUserDto);
+  async validateUser(loginUserDto: LoginUserDto) {
     const { account, password } = loginUserDto;
 
     // SELECT * FROM "public"."user" WHERE "account" = 'admin1' LIMIT 1000 OFFSET 0
@@ -87,7 +86,20 @@ export class UsersService {
       .query(`select * from "public"."user" where "account" = '${account}'`)
       .then((data) => data[0]);
 
-    console.log('user :>> ', user);
+    if (user && user.passport === password) {
+      return user;
+    }
+
+    return null;
+  }
+
+  async login(loginUserDto: LoginUserDto) {
+    const { account, password } = loginUserDto;
+
+    // SELECT * FROM "public"."user" WHERE "account" = 'admin1' LIMIT 1000 OFFSET 0
+    const user = await this.userRepository
+      .query(`select * from "public"."user" where "account" = '${account}'`)
+      .then((data) => data[0]);
 
     if (!user) {
       return {
@@ -95,18 +107,18 @@ export class UsersService {
       };
     }
 
-    console.log('user.password :>> ', user.password);
-    console.log('password :>> ', password);
     if (user.password !== password) {
       return {
         msg: '用户密码错误！',
       };
     }
 
+    // sign 的参数 payload 是可逆加密的，拿到 token 后是可以解密成明文内容的，所以这部分不要放敏感信息。
     const token = await this.jwtService.sign({
       account: user.account,
       sub: user.id,
       role: user.role,
+      secret: process.env.JWT_SECRET,
     });
 
     return {
