@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, Res } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
@@ -86,21 +86,6 @@ export class UsersService {
       .query(`select * from "public"."user" where "account" = '${account}'`)
       .then((data) => data[0]);
 
-    if (user && user.passport === password) {
-      return user;
-    }
-
-    return null;
-  }
-
-  async login(loginUserDto: LoginUserDto) {
-    const { account, password } = loginUserDto;
-
-    // SELECT * FROM "public"."user" WHERE "account" = 'admin1' LIMIT 1000 OFFSET 0
-    const user = await this.userRepository
-      .query(`select * from "public"."user" where "account" = '${account}'`)
-      .then((data) => data[0]);
-
     if (!user) {
       return {
         msg: '该用户不存在！',
@@ -113,15 +98,32 @@ export class UsersService {
       };
     }
 
+    if (user && user.password === password) {
+      return user;
+    }
+
+    return null;
+  }
+
+  async login(loginUserDto: LoginUserDto) {
+    const { account } = loginUserDto;
+
+    // SELECT * FROM "public"."user" WHERE "account" = 'admin1' LIMIT 1000 OFFSET 0
+    const user = await this.userRepository
+      .query(`select * from "public"."user" where "account" = '${account}'`)
+      .then((data) => data[0]);
+
     // sign 的参数 payload 是可逆加密的，拿到 token 后是可以解密成明文内容的，所以这部分不要放敏感信息。
     const token = await this.jwtService.sign({
       account: user.account,
       sub: user.id,
       role: user.role,
-      secret: process.env.JWT_SECRET,
+      // secret: `${process.env.JWT_SECRET}`,
+      secret: 'test',
     });
 
     return {
+      account: user.account,
       access_token: token,
       statusCode: 200,
     };

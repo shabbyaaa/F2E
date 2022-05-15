@@ -22,6 +22,7 @@ async function bootstrap() {
   const options = new DocumentBuilder()
     .setTitle('nest-jwt')
     .setDescription('nest-jwt application')
+    .addBearerAuth()
     .setVersion('1.0.0')
     .build();
   const document = SwaggerModule.createDocument(app, options);

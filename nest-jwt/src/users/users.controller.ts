@@ -10,8 +10,10 @@ import {
   ParseIntPipe,
   UseGuards,
   Request,
+  Req,
+  Res,
 } from '@nestjs/common';
-import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -29,6 +31,8 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
+  @ApiOperation({ summary: '获取所有用户信息' })
+  @ApiBearerAuth() // // swagger文档设置token
   @UseGuards(AuthGuard('jwt'))
   @Get()
   findAll(@Query() paginationQuery: PaginationQueryDto, @Request() req) {
@@ -60,8 +64,10 @@ export class UsersController {
     description: '用户登录',
     type: LoginUserDto,
   })
-  login(@Body() loginUserDto: LoginUserDto) {
-    console.log('1');
-    return this.usersService.login(loginUserDto);
+  async login(@Body() loginUserDto: LoginUserDto, @Req() req, @Res() res) {
+    const result = await this.usersService.login(loginUserDto);
+
+    res.status(200).send(result);
+    // return req.user;
   }
 }
