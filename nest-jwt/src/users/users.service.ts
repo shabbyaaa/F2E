@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException, Res } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
@@ -15,8 +16,8 @@ export class UsersService {
     @InjectRepository(User)
     private userRepository: Repository<User>,
     private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
   ) {}
-
   create(createUserDto: CreateUserDto) {
     const user = this.userRepository.create({ ...createUserDto });
 
@@ -119,7 +120,8 @@ export class UsersService {
       sub: user.id,
       role: user.role,
       // secret: `${process.env.JWT_SECRET}`,
-      secret: 'test',
+      // secret: 'test',
+      secret: this.configService.get('JWT_SECRET'),
     });
 
     return {
