@@ -47,7 +47,7 @@ const deepClone1 = (target, map = new WeakMap()) => {
 const a = {val:2};
 a.target = a;
 let newA = deepClone1(a);
-console.log(newA)
+// console.log(newA)
 
 
 // 拷贝特殊对象
@@ -97,3 +97,66 @@ const deepClone2 = (target, map = new WeakMap()) => {
 
   return res
 }
+
+
+var isValid = function(s) {
+  // const a = s.split('')
+  if (s.length % 2 === 1) return false
+
+  const stack = []
+  const map = {
+      ')': '(',
+      ']': '[',
+      '}': '{',
+  }
+
+  for(let i of s) {
+    console.log('i :>> ', i);
+    console.log('map[i] :>> ', map[i]);
+    console.log('stack[stack.length - 1] :>> ', stack[stack.length - 1]);
+      if (!map[i]) {
+          stack.push(i)
+      } else if (map[i] === stack[stack.length - 1]) {
+          stack.pop()
+      }
+
+      console.log('stack :>> ', stack);
+  }
+  console.log('stack :>> ', stack);
+  return !stack.length
+
+  // function deep(a) {
+  //     for(let i = 1; i < a.length; i++) {
+  //         const b = a[i - 1] 
+  //         const c = a[i]
+  //         if((b === '(' && c === ')') || (b === '[' && c === ']') || (b === '{' && c === '}')) {
+  //             a.splice(i-1,2)
+  //             deep(a)
+  //         }
+  //     }
+  // }
+  // deep(a)
+
+
+  // if (a.length) return false
+  // return true
+};
+
+// isValid("([}}])")
+
+var isPalindrome = function(x) {
+  x = x + ''
+  const half = Math.floor(x.length / 2)
+  const left = x.slice(0,half)
+  const right = x.slice(x.length % 2 === 1 ? half + 1 : half, x.length)
+  
+  for(let i = 0; i < left.length; i++) {
+    if (left[i] !== right[right.length - 1 - i]) {
+      return false
+    }
+  }
+
+  return true
+};
+
+console.log('isPalindrome(1234567) :>> ', isPalindrome(121));
