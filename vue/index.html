@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- {{ message }} -->
+    <span :title="message">
+      {{ message }}
+    </span>
+    <p>reverse message: {{ reverseMessage }}</p>
+    <!-- <button @click="handleClick"></button> -->
+    <input v-model="message">
+
+    <ol>
+      <todo-item
+        v-for="item in items"
+        v-bind:todo="item"
+        v-bind:key="item.id"
+      />
+    </ol>
+  </div>
+
+  <script>
+
+    Vue.component('todo-item', {
+      props: ['todo'],
+      template: '<li>{{ todo.text }}</li>'
+    })
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello world' + new Date().toLocaleString(),
+        items: [
+          { id: 0, text: '蔬菜' },
+          { id: 1, text: '奶酪' },
+          { id: 2, text: '随便其它什么人吃的东西' }
+        ]
+      },
+      computed: {
+        reverseMessage: function () {
+          return this.message.split('').reverse().join('')
+        }
+      },
+      methods: {
+        handleClick: function() {
+          this.message = this.message.split('').reverse().join('')
+        }
+      },
+    })
+
+  </script>
+</body>
+</html>
